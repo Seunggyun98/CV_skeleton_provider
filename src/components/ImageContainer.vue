@@ -67,21 +67,21 @@
       </v-row>
       <v-row style="margin: 1px">
         <v-col>
-          <v-card height="250">
+          <v-card max-height="600px" style="object-fit: contain;">
             <h3 style="margin: 2px">Before</h3>
             <v-divider></v-divider>
             <v-img
-              :src="fileUrl" style="border: 1px dashed #ccc; min-height:250px">
+              :src="fileUrl" contain height="500px"  style="border: 1px dashed #ccc;">
             </v-img>
           </v-card>
         </v-col>
         <v-divider vertical>
         </v-divider>
         <v-col>
-          <v-card height="250">
+          <v-card max-height="600px">
           <h3 style="margin: 2px">After</h3>
           <v-divider></v-divider>
-          <v-img>
+          <v-img contain height="500px">
 
           </v-img>
           </v-card>
@@ -109,13 +109,14 @@
       }
     },
     methods:{
+      
       onChange(){
       },
       upload(file){
         console.log('upload file!')
         console.log(this.file.name);
         const reader = new FileReader();
-        reader.onload = e=>{
+        reader.onload = e=>{ 
           this.fileUrl = e.target.result;
         };
         reader.readAsDataURL(file);
