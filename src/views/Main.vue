@@ -1,15 +1,17 @@
 <template>
   <div>
-    <h1 style="padding:10px">SkeletonProvider</h1>
-    <Main></Main>
+  <v-divider></v-divider>
+  <ImageContainer></ImageContainer>
   </div>
 </template>
 <script>
-import Main from './views/Main'
+
+import ImageContainer from '@/components/ImageContainer'
 
 export default{
   components: {
-    Main
+    ImageContainer,
+
   },
   data(){
     return{
@@ -17,7 +19,7 @@ export default{
     }
   },
   methods:{
-    
+
   }
 }
 </script>
