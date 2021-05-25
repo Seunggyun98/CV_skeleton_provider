@@ -1,4 +1,5 @@
 <template>
+  <form action="{% 'ac' %}" method="post">
 	<div style="margin: 1px">
     <div>
       <v-card>
@@ -89,8 +90,15 @@
       </v-row>
     </div>
 	</div>
+  </form>
 </template>
 <script>
+import axios from 'axios'
+axios.defaults.baseURL='http://127.0.0.1:3000'
+axios.defaults.xsrfCookieName='csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+//axios.defaults.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+// var URL="{% url 'projects:Unread' %}"
   export default {
     components:{
     },
@@ -129,7 +137,14 @@
       getSkeleton(){
         // 백엔드로 넘겨주기
         console.log(this.options);
+        axios.post("ac/",{'file': this.fileUrl, 'options':this.options}).then((response) => {
+            console.log(response.data)
+        })
+        .catch(error => {
+    console.log(error.response)
+});
       },
     },
+    
   }
 </script>
