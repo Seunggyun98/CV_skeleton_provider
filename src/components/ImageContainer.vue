@@ -11,29 +11,29 @@
               <v-checkbox
                 class="ma-2"
                 v-model="options.option1"
-                :label="`option1`"
+                :label="`회색조`"
                 ></v-checkbox>
               <v-checkbox
                 v-model="options.option4"
-                :label="`option4`"
+                :label="`자동 대비`"
                 ></v-checkbox>
             </v-col>
             <v-col cols="12" sm="4" md="4">
               <v-checkbox
                 class="ma-2"
                 v-model="options.option2"
-                :label="`감마 값`"
+                :label="`감마 조절`"
                 ></v-checkbox>
               <v-checkbox
                 v-model="options.option5"
-                :label="`option5`"
+                :label="``"
                 ></v-checkbox>
             </v-col>
             <v-col cols="12" sm="4" md="4">
               <v-checkbox
                 class="ma-2"
                 v-model="options.option3"
-                :label="`option3`"
+                :label="`배경 제거`"
                 ></v-checkbox>
               <v-checkbox
                 v-model="options.option6"
