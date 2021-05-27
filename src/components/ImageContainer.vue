@@ -136,8 +136,11 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
       },
       getSkeleton(){
         // 백엔드로 넘겨주기
-        console.log(this.options);
-        axios.post("ac/",{'file': this.fileUrl, 'options':this.options}).then((response) => {
+        const frm = new FormData(); 
+        console.log(this.fileUrl);
+        frm.append('file', JSON.stringify(this.fileUrl)); 
+        frm.append('options', JSON.stringify(this.options));
+        axios.post("ac/",frm).then((response) => {
             console.log(response.data)
         })
         .catch(error => {
