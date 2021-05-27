@@ -11,18 +11,18 @@
             <v-col cols="12" sm="4" md="4">
               <v-checkbox
                 class="ma-2"
-                v-model="options.option1"
+                v-model="options.gray"
                 :label="`회색조`"
                 ></v-checkbox>
               <v-checkbox
-                v-model="options.option4"
+                v-model="options.b_propo"
                 :label="`자동 대비`"
                 ></v-checkbox>
             </v-col>
             <v-col cols="12" sm="4" md="4">
               <v-checkbox
                 class="ma-2"
-                v-model="options.option2"
+                v-model="options.gamma"
                 :label="`감마 조절`"
                 ></v-checkbox>
               <v-checkbox
@@ -33,7 +33,7 @@
             <v-col cols="12" sm="4" md="4">
               <v-checkbox
                 class="ma-2"
-                v-model="options.option3"
+                v-model="options.back"
                 :label="`배경 제거`"
                 ></v-checkbox>
               <v-checkbox
@@ -105,10 +105,10 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
     data(){
       return{
         options:{
-          option1: false,
-          option2: false,
-          option3: false,
-          option4: false,
+          gray: false,
+          gamma: false,
+          back: false,
+          b_propo: false,
           option5: false,
           option6: false,
         },
@@ -145,8 +145,8 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
             console.log(response.data)
         })
         .catch(error => {
-    console.log(error.response)
-});
+          console.log(error.response)
+        });
       },
     },
     
