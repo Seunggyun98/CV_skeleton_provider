@@ -15,30 +15,30 @@
                 :label="`회색조`"
                 ></v-checkbox>
               <v-checkbox
-                v-model="options.b_propo"
-                :label="`자동 대비`"
+                v-model="options.back"
+                :label="`배경 제거`"
+                ></v-checkbox>
+            </v-col>
+            <v-col cols="12" sm="4" md="4">
+              <v-checkbox
+                class="ma-2"
+                v-model="options.autolocation"
+                :label="`배경 제거 틀 자동 조정`"
+                ></v-checkbox>
+              <v-checkbox
+                v-model="options.comp"
+                :label="`서비스 불가`"
                 ></v-checkbox>
             </v-col>
             <v-col cols="12" sm="4" md="4">
               <v-checkbox
                 class="ma-2"
                 v-model="options.gamma"
-                :label="`감마 조절`"
+                :label="`감마 제거`"
                 ></v-checkbox>
               <v-checkbox
-                v-model="options.option5"
-                :label="``"
-                ></v-checkbox>
-            </v-col>
-            <v-col cols="12" sm="4" md="4">
-              <v-checkbox
-                class="ma-2"
-                v-model="options.back"
-                :label="`배경 제거`"
-                ></v-checkbox>
-              <v-checkbox
-                v-model="options.option6"
-                :label="`option6`"
+                v-model="options.b_propo"
+                :label="`자동 대비`"
                 ></v-checkbox>
             </v-col>
           </v-row>
@@ -109,8 +109,8 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
           gamma: false,
           back: false,
           b_propo: false,
-          option5: false,
-          option6: false,
+          comp: false,
+          autolocation: false,
         },
         file: undefined,
         fileUrl:"",
