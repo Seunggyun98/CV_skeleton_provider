@@ -97,11 +97,11 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
   export default {
     watch:{
       'result.name'(){
-        console.log("here");
+        console.log("changed result image");
         this.result_img = this.result.name;
       },
       'file'(){
-        console.log("select new file");
+        console.log("selected new file");
         this.result_img=null;
       }
       
@@ -122,9 +122,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
       }
     },
     methods:{
-      
-      onChange(){
-      },
       upload(file){
         console.log('upload file!')
         console.log(this.file.name);
@@ -147,15 +144,8 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         frm.append('file', JSON.stringify(this.fileUrl)); 
         frm.append('options', JSON.stringify(this.options));
         axios.post("ac/",frm).then((response) => {
-            // var b64Response = btoa(response);
-            // this.image = response.data.name
-            // this.image = 'data:image/jpeg;base64,' + b64Response;
-            // console.log(this.image);
-            //console.log(typeof response.data)
-
             this.result = response.data;
             console.log(this.result);
-
         })
         .catch(error => {
           console.log(error.response)
