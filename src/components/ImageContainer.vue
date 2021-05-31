@@ -79,9 +79,7 @@
           <v-card max-height="600px">
           <h3 style="margin: 2px">After</h3>
           <v-divider></v-divider>
-          <v-img contain height="500px">
-
-          </v-img>
+          <v-img style="border: 1px dashed #ccc;" contain height="500px" :src ="result_img"></v-img>
           </v-card>
         </v-col>
       </v-row>
@@ -97,7 +95,16 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 //axios.defaults.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 // var URL="{% url 'projects:Unread' %}"
   export default {
-    components:{
+    watch:{
+      'result.name'(){
+        console.log("here");
+        this.result_img = this.result.name;
+      },
+      'file'(){
+        console.log("select new file");
+        this.result_img=null;
+      }
+      
     },
     data(){
       return{
@@ -108,6 +115,8 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
           b_propo: true,
           autolocation: false,
         },
+        result:undefined,
+        result_img:null,
         file: undefined,
         fileUrl:"",
       }
@@ -138,7 +147,15 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         frm.append('file', JSON.stringify(this.fileUrl)); 
         frm.append('options', JSON.stringify(this.options));
         axios.post("ac/",frm).then((response) => {
-            console.log(response.data)
+            // var b64Response = btoa(response);
+            // this.image = response.data.name
+            // this.image = 'data:image/jpeg;base64,' + b64Response;
+            // console.log(this.image);
+            //console.log(typeof response.data)
+
+            this.result = response.data;
+            console.log(this.result);
+
         })
         .catch(error => {
           console.log(error.response)
