@@ -64,7 +64,7 @@
           </v-btn>
       </v-row>
       <v-row style="margin: 1px">
-        <v-col>
+        <v-col style="text-align : center;">
           <v-card max-height="600px" style="object-fit: contain;">
             <h3 style="margin: 2px">Before</h3>
             <v-divider></v-divider>
@@ -75,11 +75,13 @@
         </v-col>
         <v-divider vertical>
         </v-divider>
-        <v-col>
-          <v-card max-height="600px">
+        <v-col style="text-align : center; justify-content:middle;">
+          <v-card max-height="600px" class="ma-3 text-xs-center">
           <h3 style="margin: 2px">After</h3>
           <v-divider></v-divider>
-          <v-img style="border: 1px dashed #ccc;" contain height="500px" :src ="result_img"></v-img>
+          <v-img style="border: 1px dashed #ccc; align-content:center;" contain height="500px" :src ="result_img">
+            <pulse-loader contain :loading="Loading" :color="color" :size="size"></pulse-loader>
+          </v-img>
           </v-card>
         </v-col>
       </v-row>
@@ -88,6 +90,7 @@
   </form>
 </template>
 <script>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import axios from 'axios'
 axios.defaults.baseURL='http://127.0.0.1:3000'
 axios.defaults.xsrfCookieName='csrftoken'
@@ -95,6 +98,9 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 //axios.defaults.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 // var URL="{% url 'projects:Unread' %}"
   export default {
+    components:{
+      PulseLoader
+    },
     watch:{
       'result.name'(){
         console.log("changed result image");
@@ -103,11 +109,17 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
       'file'(){
         console.log("selected new file");
         this.result_img=null;
+        this.endProgress();
       }
-      
     },
     data(){
       return{
+        Loading:false,
+        color: '#484862',
+        color1: '#648245',
+        size: '45px',
+        margin: '2px',
+        radius: '2px',
         options:{
           gray: false,
           gamma: 1.0,
@@ -137,20 +149,31 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         }
         this.upload(file);
       },
-      getSkeleton(){
+      async getSkeleton(){
         // 백엔드로 넘겨주기
+        this.startProgress();
+        // ('start:progress',this.startProgress)
         const frm = new FormData(); 
         console.log(this.fileUrl);
         frm.append('file', JSON.stringify(this.fileUrl)); 
         frm.append('options', JSON.stringify(this.options));
-        axios.post("ac/",frm).then((response) => {
+        await axios.post("ac/",frm).then((response) => {
+            this.endProgress();
             this.result = response.data;
             console.log(this.result);
+            console.log("로딩완료");
         })
         .catch(error => {
           console.log(error.response)
         });
+        
       },
+      startProgress(){
+        this.Loading = true;
+      },
+      endProgress(){
+        this.Loading =false;
+      }
     },
     
   }
